@@ -7,6 +7,10 @@ Is a framework that became possible program in a reactive way
 ## Reactive
 Always when you think about reactive remember: Async and non-blocking
 
+# Database
+You can create a new databe here and get the connection string to connect the application with your DB
+https://www.mongodb.com/atlas/database
+
 # Endpoints
 
 ### GET v1/playlist/events
