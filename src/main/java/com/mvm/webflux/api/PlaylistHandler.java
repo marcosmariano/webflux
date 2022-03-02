@@ -14,6 +14,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.time.Duration;
 
 import static org.springframework.web.reactive.function.BodyInserters.fromPublisher;
 import static org.springframework.web.reactive.function.server.ServerResponse.created;
@@ -37,14 +38,18 @@ public class PlaylistHandler {
     public Mono<ServerResponse> findAll(ServerRequest request){
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(playlistSearchAll.searchAll(), Playlist.class);
+                .body(playlistSearchAll.searchAll(), Playlist.class)
+                .cache(Duration.ofSeconds(1000))
+                .log("Passou aqui no GET findAll");
     }
 
     public Mono<ServerResponse> findById(ServerRequest request){
         String id = request.pathVariable("id");
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(playlistSeachById.searchById(id),Playlist.class);
+                .body(playlistSeachById.searchById(id),Playlist.class)
+                .cache(Duration.ofSeconds(1000))
+                .log("Passou aqui no GET findByID");
     }
 
     public  Mono<ServerResponse> save(ServerRequest request){
@@ -57,6 +62,7 @@ public class PlaylistHandler {
     public Mono<ServerResponse> streamEvents(ServerRequest request){
         return ok()
                 .contentType(MediaType.TEXT_EVENT_STREAM)
-                .body(playlistStreamEvent.streamEvents(), PlaylistEventStream.class);
+                .body(playlistStreamEvent.streamEvents(), PlaylistEventStream.class)
+                .log("Stream de eventos");
     }
 }
