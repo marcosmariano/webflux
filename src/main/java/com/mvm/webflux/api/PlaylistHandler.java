@@ -65,4 +65,11 @@ public class PlaylistHandler {
                 .body(playlistStreamEvent.streamEvents(), PlaylistEventStream.class)
                 .log("Stream de eventos");
     }
+
+    public Mono<ServerResponse> streamEventsWithOutDelay(ServerRequest request){
+        return ok()
+                .contentType(MediaType.TEXT_EVENT_STREAM)
+                .body(playlistSearchAll.searchAll(), Playlist.class)
+                .log("Stream de eventos sem delay");
+    }
 }

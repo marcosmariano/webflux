@@ -19,7 +19,7 @@ public class PlaylistStreamEventImpl implements PlaylistStreamEvent{
     @Override
     public Flux<Tuple2<Long, Playlist>> streamEvents() {
         System.out.println("---Start get Playlists by WEBFLUX--- " + LocalDateTime.now());
-        Flux<Long> interval = Flux.interval(Duration.ofSeconds(5));
+        Flux<Long> interval = Flux.interval(Duration.ofSeconds(2));
         Flux<Playlist> playlistFlux = playlistService.findAll();
         return Flux.zip(interval, playlistFlux);
     }
